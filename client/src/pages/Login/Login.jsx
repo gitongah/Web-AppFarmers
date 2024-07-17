@@ -7,7 +7,7 @@ import Auth from '../../utils/auth';
 function Login() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [login, { error: loginError }] = useMutation(LOGIN_USER);
-  const [signup, { error: signupError }] = useMutation(ADD_USER);
+  const [addUser, { error: signupError }] = useMutation(ADD_USER);
 
   const handleSignInClick = () => {
     setIsSignUpMode(false);
@@ -55,14 +55,14 @@ function Login() {
   const handleSignUpSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await signup({
+      const { data } = await addUser({
         variables: { 
           username: event.target.username.value, 
           email: event.target.email.value, 
           password: event.target.password.value 
         },
       });
-      Auth.login(data.signup.token);
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }

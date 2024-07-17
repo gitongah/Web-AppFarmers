@@ -25,8 +25,8 @@ const resolvers ={
       return { token, user };
     },
     // Log in to the application
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError('Invalid credentials');
@@ -43,3 +43,4 @@ const resolvers ={
     },
 }
 }
+module.exports = resolvers;
