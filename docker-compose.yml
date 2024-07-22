@@ -1,0 +1,25 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"  # Adjust the ports as necessary
+    # command: ["sh", "-c", "xdg-open http://127.0.0.1:3000/ && npm start"]
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    environment:
+      - MONGO_URI=mongodb://127.0.0.1:27017/farmersDB
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+
+
